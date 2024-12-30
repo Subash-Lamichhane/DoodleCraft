@@ -1,0 +1,24 @@
+import Background from "../../components/Background"
+import CTA from "../../components/CTA"
+import Header from "../../components/Header"
+import Features from "../../components/Landing/Features"
+import Hero from "../../components/Landing/Hero"
+import HowItWorks from "../../components/Landing/Howitworks"
+
+function Landing() {
+  return (
+    <Background>
+        <div className="min-h-screen bg-gray-900 text-gray-100">
+            <Header />
+            <main>
+                <Hero/>
+                <Features/>
+                <HowItWorks/>
+                <CTA/>
+            </main>
+        </div>
+    </Background>
+  )
+}
+
+export default Landing
