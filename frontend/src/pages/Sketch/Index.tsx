@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Upload } from "lucide-react";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 type SketchUploaderProps = {};
 
@@ -84,6 +85,10 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
           ))}
         </div>
       )}
+    </div>
+
+    <div className="text-white border-t border-gray-700">
+    <Footer/>
     </div>
     </>
   );

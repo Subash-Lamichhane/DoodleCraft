@@ -1,5 +1,6 @@
 import Background from "../../components/Background"
 import CTA from "../../components/CTA"
+import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import Features from "../../components/Landing/Features"
 import Hero from "../../components/Landing/Hero"
@@ -18,6 +19,7 @@ function Landing() {
                 <TeamMembers/>
                 <CTA/>
             </main>
+            <Footer/>
         </div>
     </Background>
   )

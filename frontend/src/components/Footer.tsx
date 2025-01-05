@@ -1,19 +1,19 @@
 import { Palette } from 'lucide-react'
-
+import { Link } from 'react-router-dom'
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 py-8">
+    <footer className="bg-black py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <Palette className="w-8 h-8 text-purple-500" />
-            <span className="text-xl font-bold">DoodleCraft</span>
+            <Link to="/" className="text-xl font-bold">DoodleCraft</Link>
           </div>
           <nav>
             <ul className="flex space-x-4">
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Contact</a></li>
+              <li><Link to="/task-completed" className="hover:text-purple-400 transition-colors">Task Completed</Link></li>
+              <li><Link to="/sketch" className="hover:text-purple-400 transition-colors">Try Now</Link></li>
+              <li><Link to="#" className="hover:text-purple-400 transition-colors">Contact</Link></li>
             </ul>
           </nav>
         </div>

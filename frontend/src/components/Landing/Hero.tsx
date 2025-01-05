@@ -3,6 +3,7 @@ import HeroSketch1 from '/landing-sketch1.jpg'
 import HeroSketch2 from '/landing-sketch2.jpg'
 import HeroRealistic1 from '/landing-realistic1.jpg'
 import HeroRealistic2 from '/landing-realistic2.jpg'
+import { Link } from 'react-router-dom'
 export default function Hero() {
   return (
     <section className="py-20 overflow-hidden">
@@ -16,14 +17,14 @@ export default function Hero() {
               DoodleCraft uses AI-powered ControlNet to turn your fashion sketches into stunning, lifelike garment images. Unleash your creativity with just a few clicks!
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="#" className="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+              <Link to="/sketch" className="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
                 Get Started
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
-              <a href="#how-it-works" className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
-                How It Works
+              </Link>
+              <Link to="/task-completed" className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+                Task Completed
                 <Sparkles className="ml-2 w-5 h-5" />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 relative">
