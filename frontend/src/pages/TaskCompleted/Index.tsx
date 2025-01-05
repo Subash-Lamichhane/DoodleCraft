@@ -52,7 +52,7 @@ export default function TaskCompleted() {
     return (
         <div className="bg-[#0a192f] text-white ">
             <Header/>
-        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-1 px-24 mb-14">
+        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-1 lg:px-16 mb-14">
             {timeline(completedTasks, true)}
             {timeline(remainingTasks, false)}
         </div>
@@ -63,7 +63,7 @@ export default function TaskCompleted() {
 
 const timeline = (milestones: MilestoneProps[], isCompleted: boolean) => {
     return (
-        <div className="min-h-screen bg-[#0a192f] p-8">
+        <div className=" bg-[#0a192f] p-2 md:p-8">
             <h1 className="text-white mb-4 text-center text-3xl font-bold">{isCompleted?"Task Completed":"Task remaining"}</h1>
             <div className=" mx-auto relative">
                 {/* Timeline line */}
