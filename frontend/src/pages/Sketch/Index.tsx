@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Upload } from "lucide-react";
+import Header from "../../components/Header";
 
 type SketchUploaderProps = {};
 
@@ -17,8 +18,6 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   };
 
   const generateImages = (): void => {
-    // Placeholder logic for generating images
-    // Replace this with your backend API call or generation logic
     setImages([
       "https://via.placeholder.com/300",
       "https://via.placeholder.com/300",
@@ -28,6 +27,10 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   };
 
   return (
+    <>
+    <div className="bg-black text-white">
+      <Header/>
+    </div>
     <div className="min-h-screen bg-black text-white flex flex-row items-center justify-center gap-32">
         <div>
       <h1 className="text-3xl font-bold mb-6">Upload Your Sketch</h1>
@@ -82,6 +85,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

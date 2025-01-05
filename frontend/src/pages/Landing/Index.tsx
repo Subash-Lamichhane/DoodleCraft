@@ -4,6 +4,7 @@ import Header from "../../components/Header"
 import Features from "../../components/Landing/Features"
 import Hero from "../../components/Landing/Hero"
 import HowItWorks from "../../components/Landing/Howitworks"
+import TeamMembers from "../../components/Landing/TeamMembers"
 
 function Landing() {
   return (
@@ -14,6 +15,7 @@ function Landing() {
                 <Hero/>
                 <Features/>
                 <HowItWorks/>
+                <TeamMembers/>
                 <CTA/>
             </main>
         </div>
