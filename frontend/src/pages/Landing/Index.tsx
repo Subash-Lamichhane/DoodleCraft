@@ -11,7 +11,7 @@ function Landing() {
   return (
     <Background>
         <div className="min-h-screen bg-gray-900 text-gray-100">
-            <Header />
+            <Header isLanding={true}/>
             <main>
                 <Hero/>
                 <Features/>
