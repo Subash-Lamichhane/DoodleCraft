@@ -22,7 +22,7 @@ export default function Hero() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <Link to="/task-completed" className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
-                Task Completed
+                Get Demo
                 <Sparkles className="ml-2 w-5 h-5" />
               </Link>
             </div>

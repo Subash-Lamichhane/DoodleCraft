@@ -7,7 +7,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-gray-800">
+    <header className="border-b border-gray-800 text-white">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <RouterLink to="/" className="flex items-center space-x-2">
           <Palette className="w-8 h-8 text-purple-500" />
@@ -66,10 +66,18 @@ export default function Header() {
                 Task Completed
               </RouterLink>
             </li>
+            <li>
+              <RouterLink
+                to="/samples"
+                className="hover:text-purple-400 transition-colors cursor-pointer py-2 md:py-0"
+              >
+                Samples
+              </RouterLink>
+            </li>
             <li className=''>
               <RouterLink
                 to="/sketch"
-                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors text-center md:py-3 "
+                className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md transition-colors text-center md:py-3 font-semibold"
               >
                 Try Now
               </RouterLink>

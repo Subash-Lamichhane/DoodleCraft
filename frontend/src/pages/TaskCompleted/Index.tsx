@@ -32,9 +32,6 @@ export default function TaskCompleted() {
             title: "Development",
             description: "Develop the web application",
         },
-    ];
-
-    const remainingTasks: MilestoneProps[] = [
         {
             title: "Final Training",
             description: "Train GAN and ControlNet on the final dataset",
@@ -43,9 +40,13 @@ export default function TaskCompleted() {
             title: "Testing",
             description: "Test the model on the final dataset",
         },
+    ];
+
+    const remainingTasks: MilestoneProps[] = [
+
         {
-            title: "Deployment",
-            description: "Deploy the model and web application",
+            title: "Deployment and documentation",
+            description: "Deploy the model and web application and document the project",
         },
     ];
 

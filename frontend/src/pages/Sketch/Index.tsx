@@ -32,7 +32,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
       <div className="bg-black text-white ">
         <Header />
       </div>
-      <div className=" bg-[#081223] text-white flex flex-row items-center justify-center gap-32 mb-12">
+      <div className=" bg-[#081223] text-white flex flex-col md:flex-row items-center justify-center gap-32 mb-12">
         <div>
           <h1 className="text-3xl font-bold mb-6 text-center">Upload Your Sketch</h1>
           <div className="w-80 p-6 bg-gray-800 rounded-lg shadow-lg text-center">
@@ -74,7 +74,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
         </div>
 
         {images.length > 0 && (
-          <div className="mt-10 grid grid-cols-2 gap-4">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
             {images.map((image, index) => (
               <img
                 key={index}
