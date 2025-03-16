@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Upload, X, Video, Image } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { useNavigate } from 'react-router-dom';
 
 type SketchUploaderProps = {};
 
@@ -11,6 +12,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   const [sketch, setSketch] = useState<string | null>(null);
   const [images, setImages] = useState<ImageState>([]);
   const [showPopup, setShowPopup] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const handleUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file = event.target.files?.[0];
@@ -33,7 +35,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   };
 
   const viewSamples = (): void => {
-    window.open("/samples", "_blank");
+    navigate("/samples");
   };
 
   return (
