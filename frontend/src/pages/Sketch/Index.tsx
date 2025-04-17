@@ -1,5 +1,6 @@
+const BASE_URL = "https://d3be-34-125-115-83.ngrok-free.app";
+
 import React, { useState } from "react";
-import { Upload, X, Video, Image, DiamondPercent } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,6 @@ import { motion } from "framer-motion"; // smooth animation lib
 type SketchUploaderProps = {};
 
 type ImageState = string[];
-
 const Sketch: React.FC<SketchUploaderProps> = () => {
   const [sketch, setSketch] = useState<string | null>(null);
   const [images, setImages] = useState<ImageState>([]);
@@ -286,7 +286,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
 
       try {
         const response = await axios.post(
-          "https://d3be-34-125-115-83.ngrok-free.app/upload-image",
+          `${BASE_URL}/upload-image`,
           {
             image_url: base64Image,
             prompt: inputValue,
@@ -337,7 +337,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   return (
     <div className="min-h-screen flex justify-between flex-col bg-[#081223]">
       {/* HEADER SECTION */}
-      <div className="bg-black text-white">
+      <div className="bg-black text-white mb-4">
         <Header />
       </div>
       {/* HEADER END  */}
@@ -346,7 +346,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
       <div className="bg-[#081223] text-white flex flex-col md:flex-row left-0 justify-center mb-12">
         <div className="grid items-center justify-center relative">
           {/* drawing or uploading section */}
-          <div className="rounded-lg bg-white flex items-center justify-center p-4">
+          <div className="rounded-lg bg-white flex items-center justify-center p-4 max-w-6xl mx-auto">
             <div className="flex gap-4">
               <div className="flex flex-col gap-6 mb-6 items-center">
                 {/* LEFT SIDE TOOLBAR TO MAKE SKETCH */}
@@ -682,7 +682,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     className="border border-gray-400 rounded p-2 w-full my-6"
-                    placeholder="Description of your sketch (optional)"
+                    placeholder="Description of your sketch"
                   />
                 </div>
               </div>
@@ -714,7 +714,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
           <div className="mt-10">
             {isProcessing ? (
               <div className="border-2 border-dashed border-gray-300 rounded-lg ml-6 flex items-center justify-center">
-                <span className="text-gray-400 p-4">[Output Area]</span>
+                <span className="text-gray-400 p-4 text-2xl">[Output Area]</span>
               </div>
             ) : (
               <div className="border-2 border-dashed border-gray-300 rounded-lg ml-6 p-4">
@@ -735,7 +735,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
                     </div>
                   </div>
                 ) : (
-                  <span className="text-gray-400 flex items-center justify-center h-48">
+                  <span className="text-gray-400 text-2xl flex items-center justify-center h-48">
                     No Output
                   </span>
                 )}
