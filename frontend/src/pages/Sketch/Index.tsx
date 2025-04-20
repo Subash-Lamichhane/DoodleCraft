@@ -51,12 +51,8 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   // Shift amount control
   const shiftAmount = isProcessing ? -150 : 0; // shift left 150px if processing
 
-  // const handleUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     setSketch(URL.createObjectURL(file));
-  //   }
-  // };
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [categoryImages, setCategoryImages] = useState<string[]>([]);
 
   useEffect(() => {
     const canvas = new fabric.Canvas("canvas", {
@@ -120,28 +116,6 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
           ...shapeOptions,
           width: 100,
           height: 100,
-        });
-        break;
-      case "circle":
-        shape = new fabric.Circle({
-          ...shapeOptions,
-          radius: 50,
-        });
-        break;
-      case "star":
-        const points = [];
-        for (let i = 0; i < 10; i++) {
-          const radius = i % 2 === 0 ? 50 : 25;
-          const angle = (i * Math.PI) / 5;
-          points.push({
-            x: radius * Math.cos(angle),
-            y: radius * Math.sin(angle),
-          });
-        }
-        shape = new fabric.Polygon(points, {
-          ...shapeOptions,
-          left: canvas.width / 2,
-          top: canvas.height / 2,
         });
         break;
       case "line":
@@ -219,39 +193,6 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
   const viewSamples = (): void => {
     navigate("/samples");
   };
-
-  // const handleSaveButtonClick = () => {
-  //   const canvasInstance = canvas.current;
-  //   if (!canvasInstance) {
-  //     console.error("Fabric canvas instance not found.");
-  //     return;
-  //   }
-
-  //   const dataURL = canvasInstance.toDataURL({
-  //     format: "png",
-  //     quality: 1,
-  //   });
-
-  //   // Create a temporary link element
-  //   const link = document.createElement("a");
-  //   link.href = dataURL;
-
-  //   // Set the download attribute with a default filename
-  //   link.download = `sketch_${new Date()
-  //     .toISOString()
-  //     .replace(/[:.]/g, "_")}.png`;
-
-  //   // Programmatically click the link to trigger the download
-  //   document.body.appendChild(link);
-  //   link.click();
-
-  //   // Clean up the temporary link
-  //   document.body.removeChild(link);
-
-  //   console.log("Attempting to save canvas as a download.");
-  //   // The user will be prompted to choose where to save the file.
-  //   // There is no way for this browser-side code to directly save to a specific folder.
-  // };
 
   const uploadSketch = async () => {
     const canvas = canvasRef.current;
@@ -334,6 +275,70 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
     }
   };
 
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+    setCategoryImages(getImageUrlsForCategory(category));
+  };
+
+  const getImageUrlsForCategory = (category: string): string[] => {
+    // In a real application, you might fetch these from an API
+    switch (category) {
+      case "bowtie":
+        return [
+          "/bowtie/bowtie_1.png", // Assume these paths exist in your public folder
+          "/bowtie/bowtie_2.png",
+          "/bowtie/bowtie_3.png",
+        ];
+      case "pocket":
+        return [
+          "/pocket/pocket_1.png",
+          "/pocket/pocket_2.png",
+          "/pocket/pocket_3.png",
+          "/pocket/pocket_4.png",
+        ];
+      case "pattern":
+        return [
+          // "/pattern/pattern_1.png",
+          "/pattern/pattern_9.png",
+          "/pattern/pattern_10.png",
+          "/pattern/pattern_11.png",
+          "/pattern/pattern_7.png",
+          "/pattern/pattern_8.png",
+          // "/pattern/pattern_2.png",
+          "/pattern/pattern_3.png",
+          "/pattern/pattern_4.png",
+          "/pattern/pattern_5.png",
+          "/pattern/pattern_6.png",
+
+        ];
+      case "dress":
+        return [
+          "/dress/dress_1.png",
+          "/dress/dress_2.png",
+          "/dress/dress_3.png",
+          "/dress/dress_4.png",
+        ];
+      default:
+        return [];
+    }
+  };
+
+  // ADD IMAGE WHEN CATEGORY IS SELECTED
+  const addImageToCanvas = (imageUrl: string) => {
+    if (!canvas) return;
+
+    fabric.Image.fromURL(imageUrl, (img) => {
+      img.scaleToWidth(100); // Adjust size as needed
+      img.set({
+        left: canvas.width / 2 - img.width / 2,
+        top: canvas.height / 2 - img.height / 2,
+        selectable: true, // Make the image selectable
+      });
+      canvas.add(img);
+      canvas.renderAll();
+    });
+  };
+
   return (
     <div className="min-h-screen flex justify-between flex-col bg-[#081223]">
       {/* HEADER SECTION */}
@@ -342,8 +347,27 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
       </div>
       {/* HEADER END  */}
 
+
       {/* MIDDLE SECTION */}
-      <div className="bg-[#081223] text-white flex flex-col md:flex-row left-0 justify-center mb-12">
+      <div className="bg-[#081223] text-white flex flex-col gap-2 md:flex-row left-0 justify-center mb-12">
+      {selectedCategory && categoryImages.length > 0 && (
+                  <div className="mt-4 p-4  rounded-lg">
+                    <h3 className="text-lg font-semibold mb-2 text-white capitalize">
+                      {selectedCategory}
+                    </h3>
+                    <div className="grid grid-cols-1 gap-2 p-2 rounded-lg bg-white">
+                      {categoryImages.map((imageUrl, index) => (
+                        <img
+                          key={index}
+                          src={imageUrl}
+                          alt={`${selectedCategory} ${index + 1}`}
+                          className="w-20 h-20 p-1 object-contain rounded-md cursor-pointer border border-gray-700 hover:border-purple-800"
+                          onClick={() => addImageToCanvas(imageUrl)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
         <div className="grid items-center justify-center relative">
           {/* drawing or uploading section */}
           <div className="rounded-lg bg-white flex items-center justify-center p-4 max-w-6xl mx-auto">
@@ -425,6 +449,59 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
                   </div>
 
                   <div
+                    onClick={() => handleCategoryClick("bowtie")}
+                    className={`flex gap-4 items-center p-2 rounded-lg ${
+                      selectedCategory === "bowtie"
+                        ? "bg-purple-400"
+                        : "hover:bg-purple-300"
+                    }`}
+                  >
+                    <button title="Bowtie">
+                      {/* You can use a simple text or an icon here */}
+                      <span className="text-white">Bowtie</span>
+                    </button>
+                  </div>
+
+                  <div
+                    onClick={() => handleCategoryClick("pocket")}
+                    className={`flex gap-4 items-center p-2 rounded-lg ${
+                      selectedCategory === "pocket"
+                        ? "bg-purple-400"
+                        : "hover:bg-purple-300"
+                    }`}
+                  >
+                    <button title="Pocket">
+                      <span className="text-white">Pocket</span>
+                    </button>
+                  </div>
+
+                  <div
+                    onClick={() => handleCategoryClick("pattern")}
+                    className={`flex gap-4 items-center p-2 rounded-lg ${
+                      selectedCategory === "pattern"
+                        ? "bg-purple-400"
+                        : "hover:bg-purple-300"
+                    }`}
+                  >
+                    <button title="Pattern">
+                      <span className="text-white">Pattern</span>
+                    </button>
+                  </div>
+
+                  <div
+                    onClick={() => handleCategoryClick("dress")}
+                    className={`flex gap-4 items-center p-2 rounded-lg ${
+                      selectedCategory === "dress"
+                        ? "bg-purple-400"
+                        : "hover:bg-purple-300"
+                    }`}
+                  >
+                    <button title="Dress">
+                      <span className="text-white">Dress</span>
+                    </button>
+                  </div>
+
+                  <div
                     onClick={() => addShape("rectangle")}
                     className={`flex gap-4 items-center p-2 rounded-lg hover:bg-purple-400 `}
                   >
@@ -449,46 +526,6 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
                       </svg>
                     </button>
                     <span className="text-white ml-4">Rectangle</span>
-                  </div>
-
-                  <div
-                    onClick={() => addShape("circle")}
-                    className="flex gap-4 items-center p-2 rounded-lg hover:bg-purple-400"
-                  >
-                    {" "}
-                    <button title="Circle Tool">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                      >
-                        <circle cx="12" cy="12" r="10" strokeWidth={2} />
-                      </svg>
-                    </button>
-                    <span className="text-white ml-4">circle</span>
-                  </div>
-
-                  <div
-                    onClick={() => addShape("star")}
-                    className="flex gap-4 items-center p-2 rounded-lg hover:bg-purple-400"
-                  >
-                    <button title="Star Tool">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                      >
-                        <path
-                          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </button>
-                    <span className="text-white ml-4">star</span>
                   </div>
 
                   <div className="grid items-center gap-2 ml-2">
@@ -519,6 +556,7 @@ const Sketch: React.FC<SketchUploaderProps> = () => {
                       </span>
                     </div>
                   </div>
+
                   <div className="grid gap-2">
                     <div
                       onClick={undo}
